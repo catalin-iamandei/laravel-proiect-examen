@@ -35,6 +35,20 @@
                       <input value="{{$user->email}}" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
                     </div>
                   </div>
+
+                  <div class="col-span-full">
+                    <label for="groups" class="block text-sm font-medium leading-6 text-white">Group</label>
+                    <select id="groups" name="group" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                      <option selected disabled>Select group</option>
+                      @foreach ($groups as $groupId => $groupName)
+                        <option 
+                        @if ($groupId === $user->group_id)
+                            selected="selected"
+                        @endif
+                        value="{{ $groupId }}">{{ $groupName }}</option>
+                      @endforeach
+                    </select>
+                  </div>
           
                   <div class="col-span-full">
                     <label for="street-address" class="block text-sm font-medium leading-6 text-white">Noua Parola</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,8 @@ class UserController extends Controller
     */
     public function create()
     {
-        return view('admin.user.create');
+        $groups = Group::get()->pluck('name', 'id');
+        return view('admin.user.create', compact('groups'));
     }
 
     /**
@@ -48,6 +50,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'group_id' => $request->group,
             'password' => $request->password
         ]);
 
@@ -61,7 +64,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.user.edit',compact('user'));
+        $groups = Group::get()->pluck('name', 'id');
+
+        return view('admin.user.edit',compact(['user', 'groups']));
     }
 
     /**
@@ -82,6 +87,9 @@ class UserController extends Controller
         if ( $request->filled( 'email' ) ) {
             $user->update([ 'email' => $request->email ]);
         }
+        if ( $request->filled( 'group' ) ) {
+            $user->update([ 'group_id' => $request->group ]);
+        }
         if ( $request->filled( 'password' ) ) {
             $user->update([ 'password' => $request->password ]);
         }
@@ -92,8 +100,10 @@ class UserController extends Controller
     /**
     * Sterge un utilizator.
     */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         User::findOrFail($id)->delete();
+        
         return redirect()->route('users.index')
             ->with('status', 'Utilizatorul a fost sters cu succes!');
     }

@@ -19,12 +19,16 @@
                   <dd class="mt-1 text-sm leading-6 text-gray-400 sm:col-span-2 sm:mt-0">{{ $user->email }}</dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-white">Group name</dt>
+                  <dd class="mt-1 text-sm leading-6 text-gray-400 sm:col-span-2 sm:mt-0">{{ $user->group ? $user->group->name : '-' }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-white">Created at</dt>
-                  <dd class="mt-1 text-sm leading-6 text-gray-400 sm:col-span-2 sm:mt-0">{{ $user->created_at }}</dd>
+                  <dd class="mt-1 text-sm leading-6 text-gray-400 sm:col-span-2 sm:mt-0">{{ date('d.m.Y H:m', strtotime($user->created_at)) }}</dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-white">Email verified at</dt>
-                  <dd class="mt-1 text-sm leading-6 text-gray-400 sm:col-span-2 sm:mt-0">{{ $user->email_verified_at ?? 'Email neverificat' }}</dd>
+                  <dd class="mt-1 text-sm leading-6 text-gray-400 sm:col-span-2 sm:mt-0">{{ $user->email_verified_at ? date('d.m.Y H:m', strtotime($user->email_verified_at)) : 'Email neverificat' }}</dd>
                 </div>
               </dl>
             </div>
