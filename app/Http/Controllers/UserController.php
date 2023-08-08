@@ -44,7 +44,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8'
         ]);
 
         User::create([
@@ -55,6 +56,37 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('status', 'Utilizator adaugat cu success!');
 
+    }
+
+    /**
+    * Edit new user - page.
+    */
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.user.edit',compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if ( $request->filled( 'name' ) ) {
+            $user->update([ 'name' => $request->name ]);
+        }
+        if ( $request->filled( 'email' ) ) {
+            $user->update([ 'email' => $request->email ]);
+        }
+        if ( $request->filled( 'password' ) ) {
+            $user->update([ 'password' => $request->password ]);
+        }
+  
+        return redirect()->route('users.index')->with('status','Utilizator a fost updatat cu success!');
     }
 
     /**

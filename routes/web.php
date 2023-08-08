@@ -26,13 +26,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //CRUD - Users
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     
     Route::get('/user/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/user/create', [UserController::class, 'store'])->name('users.store');
-    
-    // sau
-    // Route::resource('users', UserController::class);
+
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::post('/users/{id}/edit', [UserController::class, 'update'])->name('users.update');
+
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 // Route::get('/groups', [GroupController::class, 'list']);
 
