@@ -9,7 +9,6 @@ class UserController extends Controller
 {
     /**
     * Afișează o listă de utilizatori.
-    * @return \Illuminate\Http\Response
     */
     public function index()
     {
@@ -19,7 +18,6 @@ class UserController extends Controller
 
     /**
     * Afișează pagina single a unui utilizator.
-    * @return \Illuminate\Http\Response
     */
     public function show($id) {
         $user = User::findOrFail($id);
@@ -27,7 +25,7 @@ class UserController extends Controller
     }
 
     /**
-    * Create a new user - page.
+    * Pagina de creare a unui nou utilizator.
     */
     public function create()
     {
@@ -35,10 +33,9 @@ class UserController extends Controller
     }
 
     /**
-    * Store a new user.
+    * Salvarea datelor competate din pagina de adaugare utilizator in baza de date.
     *
     * @param \Illuminate\Http\Request $request
-    * @return \Illuminate\Http\Response
     */
     public function store(Request $request)
     {
@@ -59,7 +56,7 @@ class UserController extends Controller
     }
 
     /**
-    * Edit new user - page.
+    * Pagina de editare a unui utilizator.
     */
     public function edit($id)
     {
@@ -67,6 +64,9 @@ class UserController extends Controller
         return view('admin.user.edit',compact('user'));
     }
 
+    /**
+    * Editarea datelor competate din pagina de editare utilizator.
+    */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -91,7 +91,6 @@ class UserController extends Controller
 
     /**
     * Sterge un utilizator.
-    * @return \Illuminate\Http\Response
     */
     public function destroy($id) {
         User::findOrFail($id)->delete();
