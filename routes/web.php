@@ -34,6 +34,18 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/users/{id}/edit', [UserController::class, 'update'])->name('users.update');
 
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    //CRUD - Groups
+    Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
+    Route::get('/groups/{id}', [GroupController::class, 'show'])->name('groups.show');
+    
+    Route::get('/group/create', [GroupController::class, 'create'])->name('groups.create');
+    Route::post('/group/create', [GroupController::class, 'store'])->name('groups.store');
+
+    Route::get('/groups/{id}/edit', [GroupController::class, 'edit'])->name('groups.edit');
+    Route::post('/groups/{id}/edit', [GroupController::class, 'update'])->name('groups.update');
+
+    Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
 });
 // Route::get('/groups', [GroupController::class, 'list']);
 

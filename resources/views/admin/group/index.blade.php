@@ -2,12 +2,12 @@
     <x-slot name="header">
       <div class="flex justify-between align-center">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Users') }}
+            {{ __('Groups') }}
         </h2>
         <div>
-          <a href="{{url('admin/user/create')}}">
+          <a href="{{url('admin/group/create')}}">
             <button type="button" class="block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-              Add user
+              Add group
             </button>
           </a>
         </div>
@@ -26,9 +26,9 @@
                             <thead>
                               <tr>
                                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">Name</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Group</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Created at</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Started date</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Finished date</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Exam date</th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                   <span class="sr-only">Edit</span>
                                 </th>
@@ -38,20 +38,20 @@
                               </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-800">
-                              @foreach ($users as $user)
+                              @foreach ($groups as $group)
                                   <tr>
-                                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ $user->name }}</td>
-                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ $user->email }}</td>
-                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ $user->group ? $user->group->name : '-' }}</td>
-                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ date('d.m.Y H:m', strtotime($user->created_at)) }}</td>
+                                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ $group->name }}</td>
+                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ date('d.m.Y', strtotime($group->started_at)) }}</td>
+                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ date('d.m.Y', strtotime($group->finished_at)) }}</td>
+                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ date('d.m.Y', strtotime($group->exam_at)) }}</td>
                                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                          <a href="{{url('admin/users/' . $user->id)}}" class="text-indigo-400 hover:text-indigo-300">View</a>
+                                          <a href="{{url('admin/groups/' . $group->id)}}" class="text-indigo-400 hover:text-indigo-300">View</a>
                                       </td>
                                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <a href="{{route('users.edit', $user->id)}}" class="text-indigo-400 hover:text-indigo-300">Edit</a>
+                                        <a href="{{route('groups.edit', $group->id)}}" class="text-indigo-400 hover:text-indigo-300">Edit</a>
                                       </td>
                                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <form method="post" action="{{route('users.destroy', $user->id)}}">
+                                        <form method="post" action="{{route('groups.destroy', $group->id)}}">
                                           @method('delete')
                                           @csrf
                                           <button type="submit" class="btn btn-danger btn-sm text-indigo-400 hover:text-indigo-300">Delete</button>
@@ -63,7 +63,7 @@
                           </table>
                           <div class="row mt-5">
                               <div class="col-md-12">
-                                  {{ $users->links() }}
+                                  {{ $groups->links() }}
                               </div>
                           </div>
                         </div>
