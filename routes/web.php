@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -46,6 +47,18 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/groups/{id}/edit', [GroupController::class, 'update'])->name('groups.update');
 
     Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
+
+    //CRUD - Courses
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
+    
+    Route::get('/course/create', [CourseController::class, 'create'])->name('courses.create');
+    Route::post('/course/create', [CourseController::class, 'store'])->name('courses.store');
+
+    Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+    Route::post('/courses/{id}/edit', [CourseController::class, 'update'])->name('courses.update');
+
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 });
 // Route::get('/groups', [GroupController::class, 'list']);
 

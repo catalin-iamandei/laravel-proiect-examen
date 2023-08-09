@@ -12,11 +12,11 @@ class Group extends Model
     public $fillable = ['name', 'finished_at', 'exam_at', 'started_at'];
 
     /**
-    * Get the user that is in the group.
+    * Get the users that is in the group.
     */
-    public function user()
-    {
-        return $this->hasOne(User::class);
-    }
+    // public function users()
+    // {
+    //     return $this->hasMany(User::class);
+    // }
 
 }

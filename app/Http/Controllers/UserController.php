@@ -13,7 +13,8 @@ class UserController extends Controller
     */
     public function index()
     {
-        $users = User::latest()->paginate(10);
+        $users = User::latest()->paginate(10);        
+
         return view('admin.user.index', ['users' => $users]);
     }
 
@@ -22,6 +23,7 @@ class UserController extends Controller
     */
     public function show($id) {
         $user = User::findOrFail($id);
+
         return view('admin.user.single', ['user' => $user]);
     }
 
