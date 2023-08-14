@@ -14,9 +14,9 @@ class Group extends Model
     /**
     * Get the users that is in the group.
     */
-    // public function users()
-    // {
-    //     return $this->hasMany(User::class);
-    // }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 
 }
